@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1> Checking Variable </h1>
+<p id="showVariable"></p>
+
+<script>
+const token = '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';
+const owner = 'shikhoapp';
+const repo = 'mywebsite';
+
+fetch(`https://api.github.com/repos/${owner}/${repo}/actions/secrets/MY_VAR`, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    const showVar = data.value;
+    document.getElementById('showVariable').innerHTML = showVar;
+  })
+  .catch(error => alert(error);
+</script>
+</body>
+</html>
