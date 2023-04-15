@@ -23,3 +23,28 @@ fetch(`https://api.github.com/repos/${owner}/${repo}/actions/secrets/MY_VAR`, {
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<body>
+<h1> Checking Variable Now </h1>
+<p id="showVariable"></p>
+
+<script>
+const token = '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';
+const owner = 'shikhoapp';
+const repo = 'mywebsite';
+
+fetch(`https://api.github.com/repos/${owner}/${repo}/actions/secrets/MY_VAR`, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    const showVar = data.value;
+    document.getElementById('showVariable').innerHTML = showVar;
+  })
+  .catch(error => alert(error));
+</script>
+</body>
+</html>
