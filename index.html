@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <body>
-<h1> Checking Variable Now </h1>
-<p id="showVariable"></p>
+<h1> Naief </h1>
+<p id="myVar"></p>
 
+
+<script src="index.js"></script>
 <script>
-const token = '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';
-const owner = 'shikhoapp';
-const repo = 'mywebsite';
 
-fetch(`https://api.github.com/repos/${owner}/${repo}/actions/secrets/MY_VAR`, {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-})
-  .then(response => response.json())
-  .then(data => {
-    const showVar = data.value;
-    document.getElementById('showVariable').innerHTML = showVar;
-  })
-  .catch(error => alert(error));
+document.getElementById('myVar').innerText = myValue;
 </script>
 </body>
 </html>
+
+
