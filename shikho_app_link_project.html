@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIKHO APP Link Project</title>
+</head>
+<body>
+    <select id="select-subject" onchange="subjectOnChange()">
+        <option value="ss">Select a subject</option>
+    </select>
+
+    <select id="select-chapter" onchange="chapterOnChange()">
+        <option value="sc">Select a Chapter</option>
+    </select>
+
+    <script>
+        var webDB = [
+            ["1P", "ভৌতজগত ও পরিমাপ", "ভেক্টর", "গতিবিদ্যা", "পদার্থবিজ্ঞান ১ম পত্র"],
+            ["2P", "তাপগতিবিদ্যা", "স্থির তড়িৎ", "চল তড়িৎ", "পদার্থবিজ্ঞান ২য় পত্র"],
+            ["1C", "ল্যাবটরির নিরাপদ ব্যবহার", "গুণগত রসায়ন", "মৌলের পর্যায়বৃত্ত ধর্ম", "রাসায়নিক পরিবর্তন", "রসায়ন ১ম পত্র"],
+            ["2C", "পরিবেশ রসায়ন", "রসায়ন ২য় পত্র"]
+        ];
+
+
+
+        var selectSubject = document.querySelector('#select-subject');
+        var selectChapter = document.querySelector('#select-chapter');
+
+        function preload() {
+            selectChapter.disabled = true;
+
+            // Adding  the initial subjects
+            for(var i=0; i<=webDB.length-1; i++){
+                var preloadedSubject = document.createElement('option');
+                preloadedSubject.innerHTML = webDB[i][webDB[i].length-1];
+                selectSubject.appendChild(preloadedSubject);
+                preloadedSubject.setAttribute('value', webDB[i][0]);
+            }
+        }
+        preload();
+
+
+
+
+
+        function addChapters(subject) {
+            for(var i=0; i<=webDB.length-1; i++){
+                if(webDB[i][0]==subject) {
+                    for(var j=1; j<=webDB[i].length-2; j++){
+                        var addChapter = document.createElement('option');
+                        addChapter.innerHTML = j+'- '+webDB[i][j];
+                        selectChapter.appendChild(addChapter);
+                        addChapter.setAttribute('value', j);
+                    }
+                    break;
+                }
+            }
+        }
+        function removeChapters(chapterContainer) {
+            const chapterChilds = chapterContainer.childElementCount;
+            if(chapterChilds>1) {
+                for(var i=0; i<=chapterChilds-2; i++) {
+                    chapterContainer.removeChild(chapterContainer.children[1]);
+                }
+            }
+        }
+        function subjectOnChange() {
+            var selectedSub = document.getElementById('select-subject').value;
+            var chapterContainer = document.getElementById('select-chapter');
+            removeChapters(chapterContainer);
+            if(selectedSub!='ss'){
+                selectChapter.disabled = false;
+                addChapters(selectedSub);
+            } else {
+                selectChapter.disabled = true;
+            }
+        }
+
+        function chapterOnChange() {
+            
+        }
+
+
+    </script>
+</body>
+</html>
